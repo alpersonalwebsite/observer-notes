@@ -1,0 +1,111 @@
+/* Observer notes - authored, static stylesheet (spec 003). No @import, no url() to any
+   external origin (the CSP allows only this same-origin file). System fonts only. */
+:root {
+  --bg: #fbfbfa; --fg: #1d1d1f; --muted: #6b6b70; --rule: #e3e3e0;
+  --link: #2f6fb0; --code-bg: #f0f0ee; --code-fg: #383; --quote: #8a5a00;
+  --accent: #2f6fb0; --chip-bg: #ececea;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181a; --fg: #e7e7ea; --muted: #9a9aa2; --rule: #2c2d31;
+    --link: #74b1ea; --code-bg: #22242a; --code-fg: #9ccf9c; --quote: #e0b24d;
+    --accent: #74b1ea; --chip-bg: #24262c;
+  }
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--sans); font-size: 17px; line-height: 1.65;
+  overflow-wrap: break-word; word-break: break-word;
+}
+main { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
+
+h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 .25rem; }
+h2 { font-size: 1.15rem; color: var(--muted); font-weight: 600; margin: 1.6rem 0 .6rem; }
+/* dated note headers (## -> h3) read as section titles */
+h3 {
+  font-size: 1.05rem; margin: 2rem 0 .5rem; padding-bottom: .25rem;
+  border-bottom: 1px solid var(--rule);
+}
+h4 { font-size: .98rem; color: var(--muted); margin: 1.3rem 0 .4rem; }
+
+p { margin: .7rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 1.6rem 0; }
+
+a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+
+strong { font-weight: 650; }
+
+/* inline code chip and code blocks */
+code {
+  font-family: var(--mono); font-size: .9em;
+  background: var(--code-bg); color: var(--code-fg);
+  padding: .08em .35em; border-radius: 4px;
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--rule); border-radius: 8px;
+  padding: .8rem 1rem; margin: .9rem 0; overflow-x: auto;   /* wide code scrolls in its box */
+}
+pre code { background: none; color: inherit; padding: 0; white-space: pre; }
+
+blockquote {
+  margin: .9rem 0; padding: .2rem 0 .2rem 1rem;
+  border-left: 3px solid var(--rule); color: var(--muted);
+}
+ul, ol { padding-left: 1.4rem; }
+li { margin: .25rem 0; }
+
+/* highlighted quoted phrases */
+.q { color: var(--quote); }
+
+/* tag chips */
+.tags { color: var(--muted); font-size: .9rem; margin: .25rem 0 1.2rem; }
+.tag {
+  display: inline-block; background: var(--chip-bg); color: var(--muted);
+  border-radius: 999px; padding: .05rem .55rem; margin: .12rem .15rem .12rem 0;
+  font-size: .82rem;
+}
+
+/* index list */
+ul.index { list-style: none; padding-left: 0; }
+ul.index li { margin: .35rem 0; }
+ul.index a { font-variant-numeric: tabular-nums; }
+
+/* layout: single column by default; nav + content side by side on wide viewports */
+.layout { display: grid; grid-template-columns: 1fr; }
+main { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
+
+/* entry navigation (spec 003 B11) */
+nav.entries { padding: 1rem 1.15rem 0; font-size: .9rem; }
+nav.entries .allentries {
+  display: inline-block; margin-bottom: .5rem; font-weight: 600;
+  text-decoration: none; color: var(--accent);
+}
+nav.entries .allentries::before { content: "\2190  "; }   /* back arrow */
+nav.entries summary { cursor: pointer; color: var(--muted); font-weight: 600; }
+nav.entries ul { list-style: none; padding-left: 0; margin: .5rem 0 0; }
+nav.entries li { margin: .2rem 0; }
+nav.entries a { text-decoration: none; }
+nav.entries li.current {
+  font-weight: 650; color: var(--fg);
+  border-left: 3px solid var(--accent); padding-left: .5rem; margin-left: -.5rem;
+}
+
+@media (min-width: 60rem) {
+  .layout {
+    grid-template-columns: 15rem minmax(0, 46rem);
+    justify-content: center; gap: 2.5rem; align-items: start;
+  }
+  /* Only the day-page main (inside .layout) drops its margin/padding so the grid controls
+     spacing. The index main is not in .layout, so it keeps margin:0 auto + padding and
+     stays centered instead of flush-left. */
+  .layout > main { margin: 0; padding: 1.5rem 0 4rem; }
+  nav.entries {
+    position: sticky; top: 0; max-height: 100vh; overflow-y: auto;
+    padding: 1.5rem 0 2rem; border-right: 1px solid var(--rule);
+  }
+  nav.entries { padding-right: 1.5rem; }
+}
