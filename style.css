@@ -109,3 +109,17 @@ nav.entries li.current {
   }
   nav.entries { padding-right: 1.5rem; }
 }
+
+/* conversation entries (spec 002) */
+.notice {
+  background: var(--chip-bg); color: var(--muted); border: 1px solid var(--rule);
+  border-radius: 6px; padding: .5rem .8rem; font-size: .9rem; margin: .5rem 0 1.2rem;
+}
+.conversation .entry { margin: 1.1rem 0; }
+.entry .who { display: block; font-size: .8rem; color: var(--muted); font-weight: 600; margin-bottom: .25rem; }
+.entry.msg .body > :first-child { margin-top: 0; }
+.entry.action { border-left: 3px solid var(--rule); padding-left: .8rem; }
+.entry.action .cmd { background: var(--code-bg); margin: 0 0 .4rem; }
+.entry.action .cmd::before { content: "$ "; color: var(--muted); }
+.entry.action .out { background: var(--code-bg); margin: 0; color: var(--muted); }
+.entry.synthetic .placeholder { color: var(--muted); font-style: italic; }
