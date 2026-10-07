@@ -80,10 +80,12 @@ main { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1.15rem 4rem; }
 
 /* entry navigation (spec 003 B11) */
 nav.entries { padding: 1rem 1.15rem 0; font-size: .9rem; }
-nav.entries .allentries {
+nav.entries .allentries,
+nav.entries .about-project {
   display: inline-block; margin-bottom: .5rem; font-weight: 600;
   text-decoration: none; color: var(--accent);
 }
+nav.entries .about-project { display: block; }
 nav.entries .allentries::before { content: "\2190  "; }   /* back arrow */
 nav.entries summary { cursor: pointer; color: var(--muted); font-weight: 600; }
 nav.entries ul { list-style: none; padding-left: 0; margin: .5rem 0 0; }
