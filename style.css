@@ -61,6 +61,10 @@ li { margin: .25rem 0; }
 /* highlighted quoted phrases */
 .q { color: var(--quote); }
 
+/* previous/next links between the parts of a split day (spec 002 B10) */
+nav.parts { color: var(--muted); font-size: .9rem; margin: .5rem 0 1.2rem; }
+nav.parts a { text-decoration: none; }
+
 /* tag chips */
 .tags { color: var(--muted); font-size: .9rem; margin: .25rem 0 1.2rem; }
 .tag {
