@@ -1,0 +1,15 @@
+# The publisher stages this repo with `git add -A`, which skips ignored files
+# without an error, so no pattern here may match a page it writes
+# (index.html, style.css, <year>/<month>/*.html, .nojekyll, redirects.txt).
+.env*
+*.env
+*.log
+secrets/
+credentials*
+*.pem
+*.key
+node_modules/
+__pycache__/
+.DS_Store
+*.sqlite
+*.db
