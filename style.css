@@ -99,10 +99,26 @@ nav.entries li.current {
   font-weight: 650; color: var(--fg);
   border-left: 3px solid var(--accent); padding-left: .5rem; margin-left: -.5rem;
 }
+/* month groups inside Entries (spec 019 B1, B2): native disclosure, no script */
+nav.entries details.month { margin: .35rem 0 0 .2rem; }
+nav.entries details.month > summary { font-weight: 500; }
+nav.entries details.month > ul { margin: .25rem 0 .5rem .9rem; }
+
+/* previous / next day (spec 019 B4): atop the sidebar, and again after the page content */
+.daylinks { margin: 0 0 .75rem; font-weight: 600; }
+.daylinks a { color: var(--accent); text-decoration: none; }
+nav.days {
+  max-width: 46rem; margin: -2.5rem auto 2rem; padding: 1rem 1.15rem 0;
+  border-top: 1px solid var(--rule); font-size: .9rem;
+}
 
 @media (min-width: 60rem) {
   .layout {
     grid-template-columns: 15rem minmax(0, 46rem);
+    /* Row 1 holds the content, row 2 the bottom day links (spec 019 B4). The sidebar spans
+       both, and a tall sidebar's extra height goes to the flexible row 2, so row 1 stays as
+       tall as the content and the day links sit right under it on a short page. */
+    grid-template-rows: auto 1fr;
     justify-content: center; gap: 2.5rem; align-items: start;
   }
   /* Only the day-page main (inside .layout) drops its margin/padding so the grid controls
@@ -110,10 +126,13 @@ nav.entries li.current {
      stays centered instead of flush-left. */
   .layout > main { margin: 0; padding: 1.5rem 0 4rem; }
   nav.entries {
+    grid-row: 1 / span 2;
     position: sticky; top: 0; max-height: 100vh; overflow-y: auto;
     padding: 1.5rem 0 2rem; border-right: 1px solid var(--rule);
   }
   nav.entries { padding-right: 1.5rem; }
+  /* the bottom day links sit under the content, not under the sidebar (spec 019 B4) */
+  nav.days { grid-column: 2; grid-row: 2; margin: -2.5rem 0 2rem; padding: 1rem 0 0; }
 }
 
 /* conversation entries (spec 002) */
